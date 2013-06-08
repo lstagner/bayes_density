@@ -2,7 +2,7 @@
 \documentclass	[12pt]{article}
 \usepackage[pdftex]{color,graphicx}
 
-\usepackage{graphicx}
+\usepackage{graphicx,caption,subcaption}
 \begin{document}
 
 \title{\bf{Integrated Data Analysis of the DIII-D Density Profile}}
@@ -66,15 +66,52 @@ stuff
 stuff
 \subsection{H-mode reconstruction}
 stuff
-\begin{figure}[h]
-\includegraphics[scale=.5,keepaspectratio=true]{figures/bfit146102_00505_all5}
-\caption{Reconstruction}
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=12cm,keepaspectratio=true]{figures/bfit146102_00505_all5}
+	\vspace{-30pt}
+	\caption{Reconstruction}
 \label{hi}
 \end{figure}
-
 otherstuff
 \subsection{L-mode reconstruction}
 stuff
+\section{Determining discrepant diagnostics}
+\begin{figure}[ht!]
+	\centering
+	\begin{subfigure}[b]{0.5\textwidth}
+		\centering
+		\includegraphics[width=\textwidth,keepaspectratio=true]{figures/bfit146102_00505_thom5}
+		\vspace{-30pt}
+		\caption{Thomson scattering}
+		\label{fig:ts505}
+	\end{subfigure}
+	\hspace{-20pt}
+	\begin{subfigure}[b]{0.5\textwidth}
+		\centering
+		\includegraphics[width=\textwidth,keepaspectratio=true]{figures/bfit146102_00505_inter5}
+		\vspace{-30pt}
+		\caption{Interferometer}
+		\label{fig:inter505}
+	\end{subfigure} \\%  ------- End of the first row ----------------------%
+	\begin{subfigure}[b]{0.5\textwidth}
+		\centering
+		\includegraphics[width=\textwidth,keepaspectratio=true]{figures/bfit146102_00505_refl5}
+		\vspace{-30pt}
+		\caption{Reflectometry}
+		\label{fig:refl505}
+	\end{subfigure}
+	\hspace{-20pt}
+	\begin{subfigure}[b]{0.5\textwidth}
+		\centering
+		\includegraphics[width=\textwidth,keepaspectratio=true]{figures/bfit146102_00505_all5}
+		\vspace{-30pt}
+		\caption{Combined}
+		\label{fig:all505}
+	\end{subfigure}
+	\caption{The l-o-n-g caption for all the subfigures (FirstFigure through FourthFigure) goes here.}
+	\label{fig:dne505}
+\end{figure}
 \section{Conclusions and future work}
 stuff
 
