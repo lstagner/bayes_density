@@ -118,7 +118,7 @@ it is essentially a normalization constant. However, in model comparison problem
 
 \subsection{Choosing Priors}
 It was noted earlier that one has to be extra careful with the assumptions that are made prior 
-to incorporation of data. Quite fittingly, these assumptions are encoded in the choice of prior. 
+to incorporating data. Quite fittingly, these assumptions are encoded in the choice of prior. 
 This process can be difficult and if often done incorrectly. In order to choose the best prior 
 three main schools of thought for choosing priors have been developed. 
 
@@ -156,7 +156,44 @@ the parameter the principle would yield a gaussian. The principle of maximum ent
 problem of picking the right prior. It is for these reasons that we will endeavor to apply the principle of maximum entropy 
 whenever possible.   
 \subsection{Combining multiple diagnostics}
-By applying the product rule multiple
+One of the advantages of bayesian statitics is that it provides a systematic framework for combining data sets from multiple sources. 
+This can be seen from Eq. \ref{eq:bayes2}. Consider just two data points $D_1$ and $D_2$. Equation \ref{eq:bayes2} would yield:
+\begin{equation} \label{eq:twodata}
+	prob(H|D_1,D_2,I) \propto prob(D_1,D_2|H,I) \times prob(H|I)
+\end{equation}
+We can use Bayes theorem to express the posterior to be conditional on $D_1$.
+\begin{equation} \label{eq:twodatacond}
+	prob(H|D_1,D_2,I) \propto prob(D_2|H,D_1,I) \times prob(H|D_1,I)
+\end{equation}
+This shows that the prior in Eq. \ref{eq:twodata} can be replaced by the posterior based on $D_1$. 
+
+If $D_1$ and $D_2$ are independent then
+\begin{equation} \label{eq:twodataind1}
+	prob(D_1|H,D_2,I) = prob(D_1|H,I)
+\end{equation}
+and
+\begin{equation} \label{eq:twodataind2}
+	prob(D_2|H,D_1,I) = prob(D_2|H,I)
+\end{equation}
+Substituting Eq. \ref{eq:twodataind2} into Eq. \ref{eq:twodatacond} and applying Bayes theorem to the prior yields:
+\begin{equation} \label{eq:twodataexpand}
+	prob(H|D_1,D_2,I) \propto prob(D_2|H,I) \times prob(D_1|H,I) \times prob(H|I)
+\end{equation}
+This result can be generalized for $K$ data points as 
+\begin{equation} \label{eq:IDA}
+	prob(H|\{D_k\},I) \propto \left( \prod\limit_{k=0}^K prob(D_k|H,I) \right) \times prob(H|I)
+\end{equation}
+This result forms the basis for integrated data analysis. So long as all the data is independent from each other, we can assign 
+different likelihoods for each data point. This allows for the data to have different types of errors. For instance, we could combine 
+a diagnostic that is subject to systematic error with a diagnostic whose error is distributed according to a Poisson or Gaussian 
+distribution. Using more orthodox methods this could not be done easily, but within a bayesian framework it flows naturally from the 
+basic equations. 
+
+Looking more closely at Eq. \ref{eq:IDA} you will notice that each likelihood is dependent of $H$. This requires that we have a 
+forward model for the diagnostic that maps the parameters we are trying to infer to the data. To put Eq. \ref{eq:IDA} into a more 
+explicit form:
+\begin{equation} \label{eq:IDA2}
+	  prob(\vec{\alpha}|\{D_k\},I) \propto \left( \prod\limit_{k=0}^K prob(D_k|H,I) \right) \times prob(\vec{\alpha}|I)
 \section{Forward modeling of density diagnostics}
 stuff
 \subsection{Functional form of the density profile}
