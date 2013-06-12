@@ -1,7 +1,7 @@
 \NeedsTeXFormat{LaTeX2e}
-\documentclass	[12pt]{article}
+\documentclass[12pt]{article}
 \usepackage[pdftex]{color,graphicx}
-\usepackage{amsmath}
+\usepackage{amsmath,amsfonts}
 \usepackage{graphicx,caption,subcaption}
 \numberwithin{equation}{section}
 \begin{document}
@@ -92,31 +92,32 @@ statistics: Bayes' theorem
 \end{equation}
 and marginalization.
 \begin{equation} \label{eq:marginalization}
-	prob(X|I) = \int\limit_{-\infty}^{\infty} prob(X,Y|I)dY
+	prob(X|I) = \int_{-\infty}^{\infty}{(X,Y|I)dY}
 \end{equation}
 
 The power behind Bayes theorem can best be recognized with a change of notation. 
-\begin{equation} \label{eq:bayes2}
-	prob(hypothesis|\{data\},I) = \frac{prob(\{data\}|hypothesis,I) \times prob(hypothesis|I)}{prob(\{data\}|I)}
+\begin{align}\label{eq:bayes2}
+	prob(&hypothesis|\{data\},I) =  \nonumber \\ 
+	& \frac{prob(\{data\}|hypothesis,I) \times prob(hypothesis|I)}{prob(\{data\}|I)}
+\end{align}
+or as denoted in most parameter estimation problems:
+\begin{equation} \label{eq:bayes3}
+\mathcal{P}(\vec{\alpha}|\vec{d},I) = \frac{\mathcal{L}(\vec{d}|\vec{\alpha},I)\pi(\vec{\alpha}|I)}{\mathcal{Z}(\vec{d}|I)}
 \end{equation}
+where $\vec{\alpha}$ are the parameters to be inferred.
 The terms in the above equation have formal names. $prob(hypothesis|I)$ is 
-called the \emph{prior} and is often denoted in parameter estimation problems as 
-$\pi(\vec{\alpha}|I)$ where $\vec{\alpha}$ are the parameters to be inferred.
-The prior encodes the current state of knowledge about the parameters before 
-we have analyzed any new data. When we have acquired new information the prior 
-is modified by the first term, $prob(\{data\}|hypothesis,I)$ called the 
-\emph{likelihood} also denoted as $\mathcal{L}(\vec{d}|\vec{\alpha},I)$.
+called the \emph{prior}.The prior encodes the current state of knowledge about the parameters before 
+we have analyzed any new data. 
+When we have acquired new information the prior is modified by the first term, $prob(\{data\}|hypothesis,I)$ called the 
+\emph{likelihood}.
 The product of the likelihood and the prior give $prob(hypothesis|\{data\},I)$, 
-which is called the \emph{posterior} and is also denoted as 
-$\mathcal{P}(\vec{\alpha}|\vec{d},I)$. The posterior encodes our final state of knowledge 
+which is called the \emph{posterior}. The posterior encodes our final state of knowledge 
 after all the data has been incorporated.
 The maximum value of the posterior gives us the best estimate of the parameters we trying to infer.
-The last term, $prob(\{data\}|I)$, is called the \emph{evidence} or \emph{marginal likelihood} 
-and is denoted as $\mathcal{Z}$. In parameter estimation problems the evidence can be ignored since 
-it is essentially a normalization constant. However, in model comparison problems it is of vital importance.
-\subsection{Model Comparison}
-
-\subsection{Choosing Priors}
+The last term, $prob(\{data\}|I)$, is called the \emph{evidence} or \emph{marginal likelihood}. In parameter estimation problems the 
+evidence can be ignored since it is essentially a normalization constant. However, in model comparison problems it is of vital 
+importance.
+\subsection{Choosing the Best Prior}
 It was noted earlier that one has to be extra careful with the assumptions that are made prior 
 to incorporating data. Quite fittingly, these assumptions are encoded in the choice of prior. 
 This process can be difficult and if often done incorrectly. In order to choose the best prior 
@@ -155,9 +156,34 @@ principle of maximum entropy the best prior would be a Poisson distribution. Lik
 the parameter the principle would yield a gaussian. The principle of maximum entropy provides a balanced and systematic approach to 
 problem of picking the right prior. It is for these reasons that we will endeavor to apply the principle of maximum entropy 
 whenever possible.   
+\subsection{Model Comparison}
+In a bayesian framework it is possible to compare two competing models to see which one best describes the observed measurements.
+Let $\vec{d}$ be some obsevered data. A model $M$ has parameters $\vec{\alpha}$, with prior $\pi(\vec{\alpha}|M)$ and likelihood $\mathcal{L}(\vec{d}|\vec{alpha},M)$. Applying marginalization, the model evidence is defined as:
+\begin{equation} \label{eq:evidence}
+	\mathcal{Z}(\vec{d}|M) = \int \mathcal{L}(\vec{d}|\vec{\alpha},M)\pi(\vec{\alpha}|M)d\vec{\alpha}
+\end{equation}
+You will notice the above the equation is of the same form as Eq. \ref{eq:bayes3} with $M \rightarrow I$. To compare two models $M_1$ and $M_2$ one may compute the ratio of the models evidences, called the Bayes Factor\cite{von2011bayesian}:
+\begin{equation} \label{eq:bayesfactor}
+	B(M_1,M_2) = \frac{\mathcal{Z}(\vec{d}|M_1)}{\mathcal{Z}(\vec{d}|M_2)} 
+\end{equation}
+If the Bayes factor is greater than one favor model $M_1$ and values less than one favor model $M_2$. Jefferys\cite
+{jeffreys1998theory} gave the following qualitative interpretation of a Bayes factor:
+\begin{center}
+	\begin{tabular}{l|l}
+		\bf{B($M_1$,$M_2$)} & \bf{Interpretation} \\ 
+		\hline
+		${\qquad \;\;\, B(M_1,M_2) < .10}$ & Strong Evidence for $M_2$ \\
+		${.10 < B(M_1,M_2) < .33}$ & Moderate Evidence for $M_2$ \\
+		${.33 < B(M_1,M_2) < 1.0}$ & Weak Evidence for $M_2$ \\
+		${1.0 < B(M_1,M_2) < 3.0}$ & Weak Evidence for $M_1$ \\
+		${3.0 < B(M_1,M_2) < 10.}$ & Moderate Evidence for $M_1$ \\
+		${\qquad \;\;\, B(M_1,M_2) > 10.}$ & Strong Evidence for $M_1$ \\
+	\end{tabular}
+	\label{tab:bayesfactor}
+\end{center}
 \subsection{Combining multiple diagnostics}
 One of the advantages of bayesian statitics is that it provides a systematic framework for combining data sets from multiple sources. 
-This can be seen from Eq. \ref{eq:bayes2}. Consider just two data points $D_1$ and $D_2$. Equation \ref{eq:bayes2} would yield:
+This can be seen from Eq. \ref{eq:bayes3}. Consider just two data points $D_1$ and $D_2$. Bayes theorem would yield:
 \begin{equation} \label{eq:twodata}
 	prob(H|D_1,D_2,I) \propto prob(D_1,D_2|H,I) \times prob(H|I)
 \end{equation}
@@ -181,19 +207,32 @@ Substituting Eq. \ref{eq:twodataind2} into Eq. \ref{eq:twodatacond} and applying
 \end{equation}
 This result can be generalized for $K$ data points as 
 \begin{equation} \label{eq:IDA}
-	prob(H|\{D_k\},I) \propto \left( \prod\limit_{k=0}^K prob(D_k|H,I) \right) \times prob(H|I)
+	{prob(H|D,I)} \propto {\left( \prod\limits_{k=0}^K{prob(D_k|H,I)}\right)} \times {prob(H|I)}
 \end{equation}
 This result forms the basis for integrated data analysis. So long as all the data is independent from each other, we can assign 
 different likelihoods for each data point. This allows for the data to have different types of errors. For instance, we could combine 
 a diagnostic that is subject to systematic error with a diagnostic whose error is distributed according to a Poisson or Gaussian 
-distribution. Using more orthodox methods this could not be done easily, but within a bayesian framework it flows naturally from the 
+distribution. Using orthodox methods this could not be done easily, but within a bayesian framework it flows naturally from the 
 basic equations. 
 
-Looking more closely at Eq. \ref{eq:IDA} you will notice that each likelihood is dependent of $H$. This requires that we have a 
-forward model for the diagnostic that maps the parameters we are trying to infer to the data. To put Eq. \ref{eq:IDA} into a more 
-explicit form:
+Looking more closely at Eq. \ref{eq:IDA} you will notice that each likelihood is dependent on $H$. 
+If we put Eq. \ref{eq:IDA} into the notation of Eq. \ref{eq:bayes3}:
 \begin{equation} \label{eq:IDA2}
-	  prob(\vec{\alpha}|\{D_k\},I) \propto \left( \prod\limit_{k=0}^K prob(D_k|H,I) \right) \times prob(\vec{\alpha}|I)
+	  {\mathcal{P}(\vec{\alpha}|D,I)} \propto {\left( \prod\limits_{k=0}^K{\mathcal{L}(D_k|\vec{\alpha},I)} \right)} \times 
+	  {\pi(\vec{\alpha}|I)}
+\end{equation}
+We can easily see that integrated data analysis requires that we have a forward model for each diagnostic that depends on 
+a set of common parameters $\vec{\alpha}$. 
+The requirement of a forward model for each diagnostic forces one to formulate a model linking the physics underlying a measurement to 
+the resulting measurement. Mathematically, for $J$ number of diagnostics:
+\begin{equation} \label{eq:forward}
+	d_j = f_j(\vec{\beta},\vec{\gamma_j})
+\end{equation}
+where $d_k$ and $f_j$ is the theoretical measurement and forward model for diagnostic $j$,respectively.The vector $\vec{\beta}$ are the common parameters that are shared between diagnostics. The vector $\vec{\gamma_j}$ are parameters that are unique to each diagnostic. These are also called \emph{nuisance} parameters since they are of no particular interest but are needed for the forward model. These nuisance parameters mean that we need to modify the definition of the prior in Eq. \ref{eq:forward} to 
+\begin{equation} \label{eq:forwardprior}
+	\pi ( \vec{\alpha} | I ) = \pi ( \vec{\beta}|I) \times \left( \prod \limits_{j=0}^{J} \pi ( \vec{\gamma_j}|I) \right)
+\end{equation}
+If there are no nuisance parameters for the diagnostics the above equation reduces to the prior of Eq. \ref{eq:IDA2}.
 \section{Forward modeling of density diagnostics}
 stuff
 \subsection{Functional form of the density profile}
@@ -241,14 +280,12 @@ stuff
 	\includegraphics[width=12cm,keepaspectratio=true]{figures/bfit146102_00505_all5}
 	\vspace{-30pt}
 	\caption{Reconstruction}
-\label{hi}
 \end{figure}
 otherstuff
 \subsection{L-mode reconstruction}
 stuff
 \section{Determining discrepant diagnostics}
-stuff
-\begin{figure}[h!]
+\begin{figure}[h]
 	\centering
 	\begin{subfigure}[b]{0.5\textwidth}
 		\centering
@@ -283,9 +320,10 @@ stuff
 	\caption{The l-o-n-g caption for all the subfigures (FirstFigure through FourthFigure) goes here.}
 	\label{fig:dne505}
 \end{figure}
+stuff
 \section{Conclusions and future work}
 stuff
-
+\newpage
 \bibliographystyle{unsrt}
 \bibliography{bayes,algorithms,diag}
 \end{document}
