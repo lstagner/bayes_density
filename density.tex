@@ -1,13 +1,19 @@
 \NeedsTeXFormat{LaTeX2e}
 \documentclass[12pt]{article}
 \usepackage[pdftex]{color,graphicx}
+\usepackage{authblk}
 \usepackage{amsmath,amsfonts}
 \usepackage{graphicx,caption,subcaption}
 \numberwithin{equation}{section}
 \begin{document}
 
 \title{\bf{Integrated Data Analysis of the DIII-D Density Profile}}
-\author{L. Stagner \& W.W. Heidbrink \\ University of California--Irvine, Irvine, California, USA}
+\author[1]{L. Stagner}
+\author[1]{W.W. Heidbrink}
+\author[2]{MA Van Zeeland}
+\author[2]{L. Zeng}
+\affil[1]{\small{University of California--Irvine, Irvine, California, USA}}
+\affil[2]{\small{General Atomics, P. O. Box 85608, San Diego, California 92186-5608, USA}}
 \date{}
 \maketitle
 \begin{abstract}
@@ -269,8 +275,6 @@ stuff
 stuff
 \subsection{Exploring the posterior}
 stuff
-\section{Representation of Error}
-stuff
 \section{Density profile reconstructions}
 stuff
 \subsection{H-mode reconstruction}
@@ -283,6 +287,8 @@ stuff
 \end{figure}
 otherstuff
 \subsection{L-mode reconstruction}
+stuff
+\section{Representation of Error}
 stuff
 \section{Determining discrepant diagnostics}
 \begin{figure}[h]
