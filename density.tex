@@ -112,7 +112,7 @@ or as denoted in most parameter estimation problems:
 \end{equation}
 where $\vec{\alpha}$ are the parameters to be inferred.
 The terms in the above equation have formal names. $prob(hypothesis|I)$ is 
-called the \emph{prior}.The prior encodes the current state of knowledge about the parameters before 
+called the \emph{prior}. The prior encodes the current state of knowledge about the parameters before 
 we have analyzed any new data. 
 When we have acquired new information the prior is modified by the first term, $prob(\{data\}|hypothesis,I)$ called the 
 \emph{likelihood}.
@@ -234,17 +234,70 @@ the resulting measurement. Mathematically, for $J$ number of diagnostics:
 \begin{equation} \label{eq:forward}
 	d_j = f_j(\vec{\beta},\vec{\gamma_j})
 \end{equation}
-where $d_k$ and $f_j$ is the theoretical measurement and forward model for diagnostic $j$,respectively.The vector $\vec{\beta}$ are the common parameters that are shared between diagnostics. The vector $\vec{\gamma_j}$ are parameters that are unique to each diagnostic. These are also called \emph{nuisance} parameters since they are of no particular interest but are needed for the forward model. These nuisance parameters mean that we need to modify the definition of the prior in Eq. \ref{eq:forward} to 
+where $d_j$ and $f_j$ is the theoretical measurement and forward model for diagnostic $j$,respectively. The vector $\vec{\beta}$ are the common parameters that are shared between diagnostics. The vector $\vec{\gamma_j}$ are parameters that are unique to each diagnostic. These are also called \emph{nuisance} parameters since they are of no particular interest but are needed for the forward model. These nuisance parameters mean that we need to modify the definition of the prior in Eq. \ref{eq:forward} to 
 \begin{equation} \label{eq:forwardprior}
 	\pi ( \vec{\alpha} | I ) = \pi ( \vec{\beta}|I) \times \left( \prod \limits_{j=0}^{J} \pi ( \vec{\gamma_j}|I) \right)
 \end{equation}
 If there are no nuisance parameters for the diagnostics the above equation reduces to the prior of Eq. \ref{eq:IDA2}.
-\section{Forward modeling of density diagnostics}
-stuff
+\section{Forward modelling of density diagnostics}
+In the following sections we will infer the DIII-D density profile 
+from multiple diagnostics. The analysis is based off van Milligen's 
+work on inferring the density profile at the TJ-II stellarator.\cite
+{van2011integrated} 
 \subsection{Functional form of the density profile}
-stuff
+In following the analysis performed by van Milligen we can 
+parameterize the density profile as a Fourier-Bessel series:
+\begin{equation} \label{eq:densityform}
+	n_e(\rho) = \sum\limits_{k=0}^K \alpha_k J_0(\lambda_k \rho/
+	\rho_{max})
+\end{equation}
+where $\rho$ is the magnetic flux, $\lambda_k$ is the $k^th$ zero of 
+the Bessel function $J_0$ and $\alpha_k$ are the parameters to be 
+inferred. In addition to and in contrast with previous works we allow 
+for $\rho_{max}$ to be a free parameter that will also be inferred. By 
+choosing the functional form to be a function of magnetic flux we will 
+assume that the error introduced by the process of mapping to flux 
+coordinates from machine coordinates is negligible.
+
+This form of the density profile has several advantageous properties:
+\begin{itemize}
+	\item The derivative and therefore the particle flux at $\rho = 0$ is zero
+	\item The expansion goes to zero at $\rho = \rho_{max}$, which is constrained to be greater than one  
+	\item The expansion is capable of approximating any continuous and square-integrable function with arbitrary accuracy
+	\item The expansion consists of orthogonal functions.
+\end{itemize}
+These properties of the density profile allow for a fast and stable 
+maximization of the profile parameters. 
 \subsection{Interferometry}
-stuff
+DIII-D uses a fiber optic, heterodyne, two color interferometer to 
+give a line averaged electron density.\cite{van2006fiber} The basic 
+principle is that the light from a single color interferometer will 
+experience a phase shift from the plasma as well as from vibrations of 
+the associated optics. The phase shift for a given wavelength can be 
+expressed as:
+\begin{equation} \label{eq:inter_phase}
+	\phi = A \lambda + \frac{2\pi V}{\lambda}
+\end{equation}
+where the first term ($A\lambda$) is the plasma contribution with $A$ 
+related to the line-integrated density $n_e$ according to
+\begin{equation} \label{eq:inter_A_value}
+	A = k \int n_e dl = k\overline{n_e}L
+\end{equation}
+where $k=2.82 \times 10^{-15} \:m$ and the second term ($2\pi V/
+\lambda$) is the phase shift due to vibrations $V$ in the direction 
+of beam propagation. To extract the plasma density a second laser( 
+hence the name two color) is made collinear with the first. This 
+creates a system of equations which can be solved exactly.
+\begin{align} \label{eq:inter_system}
+	\overline{n_e} L = \frac{\lambda_2}{k(\lambda_2^2 - \lambda_1^2)}\left( \phi_2 - \frac{\lambda_1 \phi_1}{\lambda_2}\right) \\ 
+	2\pi V = \frac{\lambda_1 \lambda_2^2}{\:\:\,(\lambda_2^2 - \lambda_1^2)}\left( \phi_1 - \frac{\lambda_1 \phi_2}{\lambda_2}\right)
+\end{align}
+This system of equations relates the measured phase to the line-averaged density and the vibration of the plasma. 
+As seen from Eq. \ref{eq:inter_A_value} the forward model for the 
+interferometry data is:
+\begin{equation} \label{eq:inter_model}
+	\overline{n_e} = \frac{1}{L} \int n_e dl
+\end{equation}
 \subsection{Reflectometry}
 stuff
 \subsection{Thomson scattering}
