@@ -44,9 +44,9 @@ many repeated experimental trials.\cite{von2011bayesian}
 
 While the frequentist view is seemingly more objective, it is limited 
 in its straightforward application since some things cannot have long 
-run relative frequencies and, as a result, cannot be analysed by 
+run relative frequencies and, as a result, cannot be analyzed by 
 probability theory. For instance a constant, such as the mass of an 
-object, cannot be analysed by a straightforward application of the 
+object, cannot be analyzed by a straightforward application of the 
 frequentist definition of probability as a long run relative frequency. 
 To use the frequentist view you first have to relate the mass to the 
 data through some function called the \emph{statistic}. Since 
@@ -139,7 +139,7 @@ justification. Informative priors also suffer from the fact that there is not a 
 
 The second school of thought is to be as non-informative as possible. This method should 
 be used when we have no prior information about the parameter in question. The most common type of non-informative prior 
-is called the Jeffreys' Prior. The key property of the Jeffreys' Prior is that it is invariant under re-parameterization. 
+is called the Jeffreys' Prior. The key property of the Jeffreys' Prior is that it is invariant under re-parametrization. 
 The Jeffreys' prior is defined as 
 \begin{equation} \label{eq:jefferys}
 	\pi(\vec{\alpha}) \propto \sqrt{det \,\mathcal{I}(\vec{\alpha})}
@@ -159,12 +159,12 @@ problem:
 where $p(x)$ is the prior, $m(x)$ is the Lebesgue measure which ensures invariance under transformation, $\lambda$ is the Lagrange 
 multiplier, and $C(x)$ is the constraint function. For example, if we knew the mean of a parameter, using the 
 principle of maximum entropy the best prior would be a Poisson distribution. Likewise, if we knew both the mean and the variance of 
-the parameter the principle would yield a gaussian. The principle of maximum entropy provides a balanced and systematic approach to 
-problem of picking the right prior. It is for these reasons that we will endeavor to apply the principle of maximum entropy 
+the parameter the principle would yield a Gaussian. The principle of maximum entropy provides a balanced and systematic approach to 
+problem of picking the right prior. It is for these reasons that we will endeavour to apply the principle of maximum entropy 
 whenever possible.   
 \subsection{Model Comparison}
 In a bayesian framework it is possible to compare two competing models to see which one best describes the observed measurements.
-Let $\vec{d}$ be some obsevered data. A model $M$ has parameters $\vec{\alpha}$, with prior $\pi(\vec{\alpha}|M)$ and likelihood $\mathcal{L}(\vec{d}|\vec{alpha},M)$. Applying marginalization, the model evidence is defined as:
+Let $\vec{d}$ be some observed data. A model $M$ has parameters $\vec{\alpha}$, with prior $\pi(\vec{\alpha}|M)$ and likelihood $\mathcal{L}(\vec{d}|\vec{alpha},M)$. Applying marginalization, the model evidence is defined as:
 \begin{equation} \label{eq:evidence}
 	\mathcal{Z}(\vec{d}|M) = \int \mathcal{L}(\vec{d}|\vec{\alpha},M)\pi(\vec{\alpha}|M)d\vec{\alpha}
 \end{equation}
@@ -172,7 +172,7 @@ You will notice the above the equation is of the same form as Eq. \ref{eq:bayes3
 \begin{equation} \label{eq:bayesfactor}
 	B(M_1,M_2) = \frac{\mathcal{Z}(\vec{d}|M_1)}{\mathcal{Z}(\vec{d}|M_2)} 
 \end{equation}
-If the Bayes factor is greater than one favor model $M_1$ and values less than one favor model $M_2$. Jefferys\cite
+If the Bayes factor is greater than one favour model $M_1$ and values less than one favour model $M_2$. Jefferys\cite
 {jeffreys1998theory} gave the following qualitative interpretation of a Bayes factor:
 \begin{center}
 	\begin{tabular}{l|l}
@@ -188,7 +188,7 @@ If the Bayes factor is greater than one favor model $M_1$ and values less than o
 	\label{tab:bayesfactor}
 \end{center}
 \subsection{Combining multiple diagnostics}
-One of the advantages of bayesian statitics is that it provides a systematic framework for combining data sets from multiple sources. 
+One of the advantages of bayesian statistics is that it provides a systematic framework for combining data sets from multiple sources. 
 This can be seen from Eq. \ref{eq:bayes3}. Consider just two data points $D_1$ and $D_2$. Bayes theorem would yield:
 \begin{equation} \label{eq:twodata}
 	prob(H|D_1,D_2,I) \propto prob(D_1,D_2|H,I) \times prob(H|I)
@@ -246,7 +246,7 @@ work on inferring the density profile at the TJ-II stellarator.\cite
 {van2011integrated} 
 \subsection{Functional form of the density profile}
 In following the analysis performed by van Milligen we can 
-parameterize the density profile as a Fourier-Bessel series:
+parametrize the density profile as a Fourier-Bessel series:
 \begin{equation} \label{eq:densityform}
 	n_e(\rho) = \sum\limits_{k=0}^K \alpha_k J_0(\lambda_k \rho/
 	\rho_{max})
@@ -296,12 +296,17 @@ This system of equations relates the measured phase to the line-averaged density
 As seen from Eq. \ref{eq:inter_A_value} the forward model for the 
 interferometry data is:
 \begin{equation} \label{eq:inter_model}
-	\overline{n_e} = \frac{1}{L} \int n_e dl
+	d_0(\vec{\beta})=\overline{n_e} = \frac{1}{L} \int n_e(l,\vec{\beta}) dl
 \end{equation}
 \subsection{Reflectometry}
-stuff
+\begin{equation} \label{eq:refl_model}
+	d_1(\vec{\beta})= 
+\end{equation}
 \subsection{Thomson scattering}
-stuff
+The Thomson scattering diagnostics gives local measurements of the electron density and temperature. A full forward model of the Thomson scattering diagnostic would require a parametrized temperature profile. This would introduce un-necessary complexity. To avoid this, the density measurements and errors are calculated using standard data analysis techniques. Due to drifts in the calibration of the diagnostic, an additional scale parameter $A_{TS}$ is introduced. The forward model for a Thomson scattering measurement at $\rho_i$ is then:
+\begin{equation} \label{eq:thom_model}
+	d_3(\vec{\beta},A_{TS}) = A_{TS} \times n_{e}(\rho_i,\vec{\beta})
+\end{equation}
 \subsection{Beam emission spectroscopy}
 stuff
 \section{Likelihood and prior probabilities}
