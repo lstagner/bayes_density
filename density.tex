@@ -172,7 +172,7 @@ You will notice the above the equation is of the same form as Eq. \ref{eq:bayes3
 \begin{equation} \label{eq:bayesfactor}
 	B(M_1,M_2) = \frac{\mathcal{Z}(\vec{d}|M_1)}{\mathcal{Z}(\vec{d}|M_2)} 
 \end{equation}
-If the Bayes factor is greater than one favour model $M_1$ and values less than one favour model $M_2$. Jefferys\cite
+Bayes factors greater than one favour model $M_1$ and values less than one favour model $M_2$. Jefferys\cite
 {jeffreys1998theory} gave the following qualitative interpretation of a Bayes factor:
 \begin{center}
 	\begin{tabular}{l|l}
@@ -239,11 +239,13 @@ where $d_j$ and $f_j$ is the theoretical measurement and forward model for diagn
 	\pi ( \vec{\alpha} | I ) = \pi ( \vec{\beta}|I) \times \left( \prod \limits_{j=0}^{J} \pi ( \vec{\gamma_j}|I) \right)
 \end{equation}
 If there are no nuisance parameters for the diagnostics the above equation reduces to the prior of Eq. \ref{eq:IDA2}.
-\section{Forward modelling of density diagnostics}
+
 In the following sections we will infer the DIII-D density profile 
 from multiple diagnostics. The analysis is based off van Milligen's 
 work on inferring the density profile at the TJ-II stellarator.\cite
 {van2011integrated} 
+\section{Forward modelling of density diagnostics}
+
 \subsection{Functional form of the density profile}
 In following the analysis performed by van Milligen we can 
 parametrize the density profile as a Fourier-Bessel series:
@@ -310,9 +312,16 @@ The Thomson scattering diagnostics gives local measurements of the electron dens
 \subsection{Beam emission spectroscopy}
 stuff
 \section{Likelihood and prior probabilities}
-stuff
 \subsection{Priors}
-stuff
+The functional form of the density profile presents some difficulty when 
+trying to form informative priors. While we often have intimate knowledge of 
+the general shape of a density profile, that knowledge does not easily 
+transfer to the free parameters. The difficulty of transferring information 
+from data space (density) to parameter space encourages the use of pseudo--
+data points to realize physical constraints on the data space. One could 
+think of the use of pseudo--points as a type of forward modelling of the 
+prior. Since we are using pseudo--points in data space, parameter space 
+priors must be uninformative to reduce unnecessary bias. 
 \subsubsection{Parameter space priors}
 stuff
 \subsubsection{Data space priors}
@@ -349,7 +358,7 @@ stuff
 \section{Representation of Error}
 stuff
 \section{Determining discrepant diagnostics}
-\begin{figure}[h]
+\begin{figure}[ht]
 	\centering
 	\begin{subfigure}[b]{0.5\textwidth}
 		\centering
