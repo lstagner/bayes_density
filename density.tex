@@ -247,15 +247,15 @@ work on inferring the density profile at the TJ-II stellarator.\cite
 \section{Forward modelling of density diagnostics}
 
 \subsection{Functional form of the density profile}
-In following the analysis performed by van Milligen we can 
+In following the analysis performed by van Milligen, we can 
 parametrize the density profile as a Fourier-Bessel series:
 \begin{equation} \label{eq:densityform}
-	n_e(\rho) = \sum\limits_{k=0}^K \alpha_k J_0(\lambda_k \rho/
+	n_e(\rho) = \sum\limits_{k=0}^K \beta_k J_0(\lambda_k \rho/
 	\rho_{max})
 \end{equation}
-where $\rho$ is the magnetic flux, $\lambda_k$ is the $k^th$ zero of 
-the Bessel function $J_0$ and $\alpha_k$ are the parameters to be 
-inferred. In addition to and in contrast with previous works we allow 
+where $\rho$ is the magnetic flux, $\lambda_k$ is the $k^{th}$ zero of 
+the Bessel function $J_0$ and $\beta_k$ are the parameters to be 
+inferred. In addition to and in contrast with previous works, we allow 
 for $\rho_{max}$ to be a free parameter that will also be inferred. By 
 choosing the functional form to be a function of magnetic flux we will 
 assume that the error introduced by the process of mapping to flux 
@@ -323,9 +323,34 @@ think of the use of pseudo--points as a type of forward modelling of the
 prior. Since we are using pseudo--points in data space, parameter space 
 priors must be uninformative to reduce unnecessary bias. 
 \subsubsection{Parameter space priors}
-stuff
+The coefficients of the Fourier-Bessel series, $\vec{\beta}$, are location 
+parameters. As such, the least informative prior would be uniform. Taking 
+into account that at the density at $\rho = 0$ is unlikely to exceed $10^{20} 
+\: m^{-3}$ we limit the values to be between $-10^{20} \: m^{-3}$ and $10^
+{20} \: m^{-3}$. Mathematically,with $\beta_k$ in units of $10^{19}\: m^{-3}$, the prior is
+\begin{equation} \label{eq:coeffpriors}
+	\pi(\vec{\beta}|I) \propto \prod \limits_{k=0}^{K} (\Theta(\beta_k + 10) 		- \Theta(\beta_k - 10))
+\end{equation}
+
+The density goes to zero outside the last closed flux surface $(\rho=1)$. By design, the functional form of the density profile goes to zero at $\rho_{max}$. It is therefore proper to assign a prior that is uniform between $\rho = 1.1$ and $\rho = 1.2$. Mathematically this is
+\begin{equation} \label{eq:rhomaxprior}
+	\pi(\rho_{max}|I) \propto \Theta(\rho_{max}-1.1)-\Theta(\rho_{max} - 1.2)
+\end{equation}
+This prior replaces the data space prior that is van Millagen's analysis that limits the  
 \subsubsection{Data space priors}
-stuff
+Data space priors, henceforth called likelihood priors, use psuedo--points and therefore resemble likelihood functions that are associated with measurements. To avoid confusion with likelihood functions $\mathcal{L}$, we will denote likelihood priors with the superscript $p$. 
+
+To keep the density profile positive on the region of $0 \le \rho \le 1$ we introduce a set of $n_1$ equally spaced psuedo--points in the region with a log likelihood prior of 
+\begin{equation} \label{eq:pos_prior}
+	\ln(\mathcal{L}^p_1) = \sum \limits_{i=0}^{n_1} -\frac{(min(0,n_e(\rho_i))^2}{2 \sigma_1^2}
+\end{equation}  
+We choose $n_1=20$ and $\sigma_1 = 0.0001$ with $n_e$ in units of $10^{19}\: m^{-3}$. This yeilds a harsh penalty for negative densities but does not penalize positive densities. 
+
+In a departure from the analysis of van Milligen, we do not put any constraints on the first derivative of the density profile. Instead we put a weak constraint on the second derivative to avoid large oscillitory behavior. To do this we introduce a set of $n_2$ equally spaced psuedo--points in the region $0 \le \rho \le 0.8$ with a log likelihood prior of
+\begin{equation} \label{eq:second_prior}
+	\ln(\mathcal{L}^p_2) = \sum \limits_{i=0}^{n_2}-\frac{(\partial^2_{\rho}\, n_e(\rho_i))^2}{2 \sigma_2^2}
+\end{equation} 
+with $n_2=20$ and $\sigma_2=10$ with $n_e$ in units of $10^{19}\: m^{-3}$. 
 \subsection{Likelihoods}
 stuff
 \subsubsection{Interferometry}
