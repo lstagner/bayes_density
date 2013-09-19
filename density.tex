@@ -33,22 +33,22 @@ areas of interest. Bayesian data analysis give a comprehensive,
 scalable, and automated framework for combining complementary 
 diagnostics.    
 \subsection{The Bayesian perspective}
-Bayesian statistics differs from the prevailing frequentist statistics 
+Bayesian statistics differs from the prevailing Frequentist statistics 
 that is taught in most introductory courses. The difference between the 
 two views is in the definition of probability. In the Bayesian 
 perspective, probability represented a degree of belief or plausibility 
 that an event was true, based on the information available. This school 
-of thought is opposed to frequentist view that probability is a long 
+of thought is opposed to Frequentist view that probability is a long 
 run relative frequency with which the event occurs, given infinitely 
 many repeated experimental trials.\cite{von2011bayesian}
 
-While the frequentist view is seemingly more objective, it is limited 
+While the Frequentist view is seemingly more objective, it is limited 
 in its straightforward application since some things cannot have long 
 run relative frequencies and, as a result, cannot be analyzed by 
 probability theory. For instance a constant, such as the mass of an 
 object, cannot be analyzed by a straightforward application of the 
-frequentist definition of probability as a long run relative frequency. 
-To use the frequentist view you first have to relate the mass to the 
+Frequentist definition of probability as a long run relative frequency. 
+To use the Frequentist view you first have to relate the mass to the 
 data through some function called the \emph{statistic}. Since 
 statistic is subject to random noise it becomes the random variable to 
 which the rules of probability can then be applied. The issue with this 
@@ -59,15 +59,15 @@ be used in any situation. These rules and tests hides much of the
 mechanics and assumptions inherent in the analysis and the consequences 
 can often turn up at the worst possible moments.
 
-The bayesian definition has no such difficulty since nearly anything 
+The Bayesian definition has no such difficulty since nearly anything 
 can be thought of as a probability and the framework explicitly 
 formulates all assumptions. That is not to say that it is without its 
-issues. The frequentist view is often much easier to use because it 
-hides most of the difficulties from the user. In bayesian statistics 
+issues. The Frequentist view is often much easier to use because it 
+hides most of the difficulties from the user. In Bayesian statistics 
 you have to be very careful with the assumptions that are made since it 
 can drastically affect the results. Also, the calculation of optimal 
 parameters is also a challenging numerical exercise in Bayesian 
-statistics. It was partially for this reason that the frequentist view 
+statistics. It was partially for this reason that the Frequentist view 
 arose into prominence. It was only in the mid 20\textsuperscript{th} 
 century with the advent of computers and efficient sampling algorithms 
 that Bayesian statistics has begun its resurgence. In recent years 
@@ -160,7 +160,7 @@ where $p(x)$ is the prior, $m(x)$ is the Lebesgue measure which ensures invarian
 multiplier, and $C(x)$ is the constraint function. For example, if we knew the mean of a parameter, using the 
 principle of maximum entropy the best prior would be a Poisson distribution. Likewise, if we knew both the mean and the variance of 
 the parameter the principle would yield a Gaussian. The principle of maximum entropy provides a balanced and systematic approach to 
-problem of picking the right prior. It is for these reasons that we will endeavour to apply the principle of maximum entropy 
+problem of picking the right prior. It is for these reasons that we will endeavor to apply the principle of maximum entropy 
 whenever possible.   
 \subsection{Model Comparison}
 In a bayesian framework it is possible to compare two competing models to see which one best describes the observed measurements.
@@ -172,7 +172,7 @@ You will notice the above the equation is of the same form as Eq. \ref{eq:bayes3
 \begin{equation} \label{eq:bayesfactor}
 	B(M_1,M_2) = \frac{\mathcal{Z}(\vec{d}|M_1)}{\mathcal{Z}(\vec{d}|M_2)} 
 \end{equation}
-Bayes factors greater than one favour model $M_1$ and values less than one favour model $M_2$. Jefferys\cite
+Bayes factors greater than one favor model $M_1$ and values less than one favor model $M_2$. Jefferys\cite
 {jeffreys1998theory} gave the following qualitative interpretation of a Bayes factor:
 \begin{center}
 	\begin{tabular}{l|l}
@@ -188,7 +188,7 @@ Bayes factors greater than one favour model $M_1$ and values less than one favou
 	\label{tab:bayesfactor}
 \end{center}
 \subsection{Combining multiple diagnostics}
-One of the advantages of bayesian statistics is that it provides a systematic framework for combining data sets from multiple sources. 
+One of the advantages of Bayesian statistics is that it provides a systematic framework for combining data sets from multiple sources. 
 This can be seen from Eq. \ref{eq:bayes3}. Consider just two data points $D_1$ and $D_2$. Bayes theorem would yield:
 \begin{equation} \label{eq:twodata}
 	prob(H|D_1,D_2,I) \propto prob(D_1,D_2|H,I) \times prob(H|I)
@@ -211,14 +211,14 @@ Substituting Eq. \ref{eq:twodataind2} into Eq. \ref{eq:twodatacond} and applying
 \begin{equation} \label{eq:twodataexpand}
 	prob(H|D_1,D_2,I) \propto prob(D_2|H,I) \times prob(D_1|H,I) \times prob(H|I)
 \end{equation}
-This result can be generalized for $K$ data points as 
+This result can be generalized for $K$ independent data points as 
 \begin{equation} \label{eq:IDA}
 	{prob(H|D,I)} \propto {\left( \prod\limits_{k=0}^K{prob(D_k|H,I)}\right)} \times {prob(H|I)}
 \end{equation}
 This result forms the basis for integrated data analysis. So long as all the data is independent from each other, we can assign 
 different likelihoods for each data point. This allows for the data to have different types of errors. For instance, we could combine 
 a diagnostic that is subject to systematic error with a diagnostic whose error is distributed according to a Poisson or Gaussian 
-distribution. Using orthodox methods this could not be done easily, but within a bayesian framework it flows naturally from the 
+distribution. Using orthodox methods this could not be done easily, but within a Bayesian framework it flows naturally from the 
 basic equations. 
 
 Looking more closely at Eq. \ref{eq:IDA} you will notice that each likelihood is dependent on $H$. 
@@ -234,7 +234,7 @@ the resulting measurement. Mathematically, for $J$ number of diagnostics:
 \begin{equation} \label{eq:forward}
 	d_j = f_j(\vec{\beta},\vec{\gamma_j})
 \end{equation}
-where $d_j$ and $f_j$ is the theoretical measurement and forward model for diagnostic $j$,respectively. The vector $\vec{\beta}$ are the common parameters that are shared between diagnostics. The vector $\vec{\gamma_j}$ are parameters that are unique to each diagnostic. These are also called \emph{nuisance} parameters since they are of no particular interest but are needed for the forward model. These nuisance parameters mean that we need to modify the definition of the prior in Eq. \ref{eq:forward} to 
+where $d_j$ and $f_j$ is the theoretical measurement and forward model for diagnostic $j$, respectively. The vector $\vec{\beta}$ are the common parameters that are shared between diagnostics. The vector $\vec{\gamma_j}$ are parameters that are unique to each diagnostic. These are also called \emph{nuisance} parameters since they are of no particular interest but are needed for the forward model. These nuisance parameters mean that we need to modify the definition of the prior in Eq. \ref{eq:forward} to 
 \begin{equation} \label{eq:forwardprior}
 	\pi ( \vec{\alpha} | I ) = \pi ( \vec{\beta}|I) \times \left( \prod \limits_{j=0}^{J} \pi ( \vec{\gamma_j}|I) \right)
 \end{equation}
@@ -244,7 +244,7 @@ In the following sections we will infer the DIII-D density profile
 from multiple diagnostics. The analysis is based off van Milligen's 
 work on inferring the density profile at the TJ-II stellarator.\cite
 {van2011integrated} 
-\section{Forward modelling of density diagnostics}
+\section{Forward modeling of density diagnostics}
 
 \subsection{Functional form of the density profile}
 In following the analysis performed by van Milligen, we can 
@@ -319,15 +319,15 @@ the general shape of a density profile, that knowledge does not easily
 transfer to the free parameters. The difficulty of transferring information 
 from data space (density) to parameter space encourages the use of pseudo--
 data points to realize physical constraints on the data space. One could 
-think of the use of pseudo--points as a type of forward modelling of the 
+think of the use of pseudo--points as a type of forward modeling of the 
 prior. Since we are using pseudo--points in data space, parameter space 
 priors must be uninformative to reduce unnecessary bias. 
 \subsubsection{Parameter space priors}
 The coefficients of the Fourier-Bessel series, $\vec{\beta}$, are location 
-parameters. As such, the least informative prior would be uniform. Taking 
+parameters. As a result, the least informative prior would be uniform. Taking 
 into account that at the density at $\rho = 0$ is unlikely to exceed $10^{20} 
 \: m^{-3}$ we limit the values to be between $-10^{20} \: m^{-3}$ and $10^
-{20} \: m^{-3}$. Mathematically,with $\beta_k$ in units of $10^{19}\: m^{-3}$, the prior is
+{20} \: m^{-3}$. Mathematically, with $\beta_k$ in units of $10^{19}\: m^{-3}$, the prior is
 \begin{equation} \label{eq:coeffpriors}
 	\pi(\vec{\beta}|I) \propto \prod \limits_{k=0}^{K} (\Theta(\beta_k + 10) 		- \Theta(\beta_k - 10))
 \end{equation}
@@ -336,35 +336,35 @@ The density goes to zero outside the last closed flux surface $(\rho=1)$. By des
 \begin{equation} \label{eq:rhomaxprior}
 	\pi(\rho_{max}|I) \propto \Theta(\rho_{max}-1.1)-\Theta(\rho_{max} - 1.2)
 \end{equation}
-This prior replaces the data space prior that is van Millagen's analysis that limits the  
-\subsubsection{Data space priors}
-Data space priors, henceforth called likelihood priors, use psuedo--points and therefore resemble likelihood functions that are associated with measurements. To avoid confusion with likelihood functions $\mathcal{L}$, we will denote likelihood priors with the superscript $p$. 
+This prior replaces the data space prior that is van Millagen's analysis that puts limits the density to be small outside the last closed flux surface. 
 
-To keep the density profile positive on the region of $0 \le \rho \le 1$ we introduce a set of $n_1$ equally spaced psuedo--points in the region with a log likelihood prior of 
+The parameter $A_{TS}$ is a scale parameter. As a result, the proper prior would be uniform in log space. From experience, it can be reasonably assumed that the calibration of the instrumentation does not vary wildly from unity. We therefore can put upper and lower limits to the parameter to be near unity. 
+\subsubsection{Data space priors}
+Data space priors, henceforth called likelihood priors, use pseudo--points and therefore resemble likelihood functions that are associated with measurements. To avoid confusion with likelihood functions $\mathcal{L}$, we will denote likelihood priors with the superscript $p$. 
+
+To keep the density profile positive on the region of $0 \le \rho \le 1$ we introduce a set of $n_1$ equally spaced pseudo--points in the region with a log likelihood prior of 
 \begin{equation} \label{eq:pos_prior}
 	\ln(\mathcal{L}^p_1) = \sum \limits_{i=0}^{n_1} -\frac{(min(0,n_e(\rho_i))^2}{2 \sigma_1^2}
 \end{equation}  
-We choose $n_1=20$ and $\sigma_1 = 0.0001$ with $n_e$ in units of $10^{19}\: m^{-3}$. This yeilds a harsh penalty for negative densities but does not penalize positive densities. 
+We choose $n_1=20$ and $\sigma_1 = 0.0001$ with $n_e$ in units of $10^{19}\: m^{-3}$. This yields a harsh penalty for negative densities but does not penalize positive densities. 
 
-In a departure from the analysis of van Milligen, we do not put any constraints on the first derivative of the density profile. Instead we put a weak constraint on the second derivative to avoid large oscillitory behavior. To do this we introduce a set of $n_2$ equally spaced psuedo--points in the region $0 \le \rho \le 0.8$ with a log likelihood prior of
+In a departure from the analysis of van Milligen, we do not put any constraints on the first derivative of the density profile. Instead, we put a weak constraint on the second derivative to avoid large oscillatory behavior. To do this we introduce a set of $n_2$ equally spaced pseudo--points in the region $0 \le \rho \le 0.8$ with a log likelihood prior of
 \begin{equation} \label{eq:second_prior}
 	\ln(\mathcal{L}^p_2) = \sum \limits_{i=0}^{n_2}-\frac{(\partial^2_{\rho}\, n_e(\rho_i))^2}{2 \sigma_2^2}
 \end{equation} 
 with $n_2=20$ and $\sigma_2=10$ with $n_e$ in units of $10^{19}\: m^{-3}$. 
 \subsection{Likelihoods}
-stuff
-\subsubsection{Interferometry}
-stuff
-\subsubsection{Reflectometry}
-stuff
-\subsubsection{Thomson scattering}
-stuff
-\subsubsection{Beam emission spectroscopy}
-stuff
-\subsubsection{Combined likelihood probability}
-stuff
+In principle each diagnostic's likelihood function could have a different functional form depending on the type of error that is most prevalent. For the diagnostics used in this analysis the assumption is made that random error dominates over other types of errors, such as systematic error. As a result, the total likelihood for each diagnostic $J$ with $N_j$ data points can be mathematically represented as:
+\begin{equation} \label{eq:k_like}
+  \ln(\mathcal{L}_j) = \sum \limits_{i=0}^{N_j} -\frac{(d_j(\vec{\beta})-D_{ji})^2}{2 \sigma_i^2}
+\end{equation}
+
 \section{Total posterior probability}
-stuff
+The total posterior is given by the product of the likelihood functions and priors. For numerical efficiency it usually represented as a sum of the log likelihood and log priors. The total log posterior probability is then given by:
+
+\begin{equation} \label{eq:tot_post} 
+\ln(\mathcal{P}(\vec{\beta}|\vec{D},I)) = \sum \limits_{j=0}^{J} \ln(\mathcal{L}_j) + \sum \limits_{m=0}^{2} \ln(\mathcal{L}^p_m)  + \ln(\pi(\rho_{max}|I)\pi(\vec{\beta}|I)\pi(A_{TS}|I))
+\end{equation}
 \subsection{Exploring the posterior}
 stuff
 \section{Density profile reconstructions}
@@ -409,7 +409,7 @@ stuff
 	\end{subfigure}
 	\hspace{-20pt}
 	\begin{subfigure}[b]{0.5\textwidth}
-		\centering
+		\centering‪
 		\includegraphics[width=\textwidth,keepaspectratio=true]{figures/bfit146102_00505_all5}
 		\vspace{-30pt}
 		\caption{Combined}
