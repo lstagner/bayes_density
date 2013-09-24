@@ -32,9 +32,8 @@ While the Frequentist view is seemingly more objective, it is limited in its str
 The Bayesian definition has no such difficulty since nearly anything can be thought of as a probability and the framework explicitly formulates all assumptions. That is not to say that it is without its issues. The Frequentist view is often much easier to use because it hides most of the difficulties from the user. In Bayesian statistics you have to be very careful with the assumptions that are made sinceit can drastically affect the results. Also, the calculation of optimal parameters is also a challenging numerical exercise in Bayesian statistics. It was partially for this reason that the Frequentist view arose into prominence. It was only in the mid 20\textsuperscript{th} century with the advent of computers and efficient sampling algorithms that Bayesian statistics has begun its resurgence. In recent years Bayesian analysis has become essential to many scientific fields such as cosmology and artificial intelligence.\cite{von2011bayesian}
 
 \subsection{Mathematical Formulation}
-In 1946, Richard Cox began to formulate the rules for logical and consistent reasoning by considering how we might quantify our beliefs about the truth of an event or object. He concluded that the real numbers we attached to our beliefs followed the rules of probability:
+In 1946, Richard Cox began to formulate the rules for logical and consistent reasoning by considering how we might quantify our beliefs about the truth of an event or object. He concluded that the real numbers we attached to our beliefs followed the rules of probability:\cite{sivia2006data} 
 
-\cite{sivia2006data} 
 \begin{equation} \label{eq:sumrule}
 	prob(X|I) + prob(\overline{X}|I) = 1
 \end{equation}
@@ -262,7 +261,8 @@ The total posterior is given by the product of the likelihood functions and prio
 \ln(\mathcal{P}(\vec{\beta}|\vec{D},I)) = \sum \limits_{j=0}^{J} \ln(\mathcal{L}_j) + \sum \limits_{m=0}^{2} \ln(\mathcal{L}^p_m)  + \ln(\pi(\rho_{max}|I)\pi(\vec{\beta}|I)\pi(A_{TS}|I))
 \end{equation}
 \subsection{Exploring the posterior}
-stuff
+One of the reasons that Bayesian statisics never became prevalent is because it is difficult to calculate aspects of the posterior in several dimensions. With the advent of computers this is no longer a debilitating issue. There are several methods of exploring the posterior. The use of Markov Chain Monte Carlo (MCMC) techniques is the most common. MCMC provides samples of the posterior that can be used to calculate various aspects of the posterior. Another popular method is called Nested Sampling\cite{skilling2006nested}. Like MCMC, Nested Sampling calculates samples of the posterior. However, it also assigns probabilities to each sample and calculates the evidence value. This allows for easy model comparison using Bayes Factors. It is for these reasons the we will used Nested Sampling for our analysis. The specific Nested Sampling algorithm we will be using is a variation of a method called Multimodal Nested Sampling or Multinest\cite{feroz2008multimodal}\cite{feroz2009multinest}. This general method was chosen for its computational efficiency and ability to handle multimodal posteriors.
+
 \section{Density profile reconstructions}
 stuff
 \subsection{H-mode reconstruction}
